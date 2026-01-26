@@ -26,7 +26,7 @@ yargs(hideBin(process.argv))
                 console.log(chalk.red("authentication failed :(") + "\n" + chalk.grey("reason: incorrect credentials."));
                 break;
             case CtfdLoginResult.FailureSystem:
-                console.log(chalk.red("authentication failed :(") + "\n" + chalk.grey("reason: a session or token could not be gathered."));
+                console.log(chalk.red("authentication failed :(") + "\n" + chalk.grey("reason: a session or an XSRF token could not be gathered."));
         }
     })
     .command("info", "shows current CTF info", async () => {
