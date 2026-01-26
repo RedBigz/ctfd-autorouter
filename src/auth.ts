@@ -2,7 +2,6 @@ import axios from "axios";
 import { savedData, writeData } from "./savedData.js";
 import { getCtfdInfoRaw } from "./info.js";
 import type { CtfdCookies } from "./types.js";
-import { realpath, write } from "node:fs";
 
 export async function checkIfLoggedIn(): Promise<boolean> {
     if (!savedData.url) return false;
