@@ -15,7 +15,6 @@ export async function checkIfLoggedIn(): Promise<boolean> {
 export async function gatherSession(url: string): Promise<boolean> {
     savedData.url = url;
     let resp = await axios.get(savedData.url);
-    // console.log(result);
     let cookies: CtfdCookies = <string>(<string[]>resp.headers["set-cookie"])[0];
     if (!cookies.includes("session")) return false;
     savedData.cookies = cookies;
@@ -39,7 +38,7 @@ export enum CtfdLoginResult {
 }
 
 export async function login(url: string, username: string, password: string): Promise<CtfdLoginResult> {
-    if (!gatherSession(url)) return CtfdLoginResult.FailureSystem;
+    if (!await gatherSession(url)) return CtfdLoginResult.FailureSystem;
 
     let token = await gatherCSRFToken();
 
