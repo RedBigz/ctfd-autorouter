@@ -1,0 +1,37 @@
+{
+  "name": "ctfd-autorouter",
+  "version": "1.0.0",
+  "description": "A userbot for CTFd to automatically download jeopardy CTF challenges and group challenges based on their attributes (to improve team efficiency).",
+  "keywords": [
+    "ctfd",
+    "ctf",
+    "hacking"
+  ],
+  "homepage": "https://github.com/RedBigz/ctfd-autorouter#readme",
+  "bugs": {
+    "url": "https://github.com/RedBigz/ctfd-autorouter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RedBigz/ctfd-autorouter.git"
+  },
+  "license": "MIT",
+  "author": "RedBigz",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "prepare": "npm run build"
+  },
+  "bin": {
+    "ctf": "dist/cli.js"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.10",
+    "@types/yargs": "^17.0.35",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "yargs": "^18.0.0"
+  }
+}
