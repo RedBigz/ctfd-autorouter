@@ -28,14 +28,14 @@ export interface CtfdInfo {
     };
 
     /**
-     * The (unix) time that the CTF will start at.
+     * The time that the CTF will start at.
      */
-    start: number;
+    start: Date;
 
     /**
-     * The (unix) time that the CTF will end at.
+     * The time that the CTF will end at.
      */
-    end: number;
+    end: Date;
 }
 
 export async function getCtfdInfoRaw() {
@@ -58,7 +58,7 @@ export async function getCtfdInfo(): Promise<CtfdInfo | null> {
     return {
         name: title,
         user: { id: info.userId, name: info.userName, email: info.userEmail },
-        start: info.start,
-        end: info.end
+        start: new Date(info.start * 1000),
+        end: new Date(info.end * 1000),
     };
 }
