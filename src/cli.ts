@@ -41,7 +41,9 @@ yargs(hideBin(process.argv))
             return;
         }
 
-        console.log(chalk.bold(`${info.name}`));
+        console.log(chalk.bold(info.name));
+        console.log(chalk.green("start date: ") + info.start);
+        console.log(chalk.red("end date: ") + info.end);
 
         if (info.user.id != 0) {
             // user exists
