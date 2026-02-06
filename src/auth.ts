@@ -3,12 +3,20 @@ import { savedData, writeData } from "./savedData.js";
 import { getCtfdInfoRaw } from "./info.js";
 import type { CtfdCookies } from "./types.js";
 
+export let authState: { loggedIn: undefined | boolean } = { loggedIn: undefined };
+
 export async function checkIfLoggedIn(): Promise<boolean> {
-    if (!savedData.url) return false;
+    if (authState.loggedIn !== undefined) return authState.loggedIn;
 
-    let resp = await axios.get(savedData.url + "/api/v1/users/me", savedData.cookies ? { headers: { "Cookie": savedData.cookies }, maxRedirects: 0, validateStatus: () => true } : undefined);
+    authState.loggedIn = false;
 
-    return resp.status == 200;
+    if (savedData.url) {
+        let resp = await axios.get(savedData.url + "/api/v1/users/me", savedData.cookies ? { headers: { "Cookie": savedData.cookies }, maxRedirects: 0, validateStatus: () => true } : undefined);
+
+        authState.loggedIn = resp.status == 200;
+    }
+
+    return authState.loggedIn;
 }
 
 export async function gatherSession(url: string): Promise<boolean> {
