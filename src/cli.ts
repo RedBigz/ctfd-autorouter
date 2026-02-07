@@ -100,7 +100,7 @@ yargs(hideBin(process.argv))
             console.log("\n" + result.info.description);
 
             if (result.info.files.length > 0)
-                console.log(chalk.magenta("\nattachments: " + Object.entries(result.info.files).map(([linkIndex, link]) => chalk.italic(`[${result.info.id}:${linkIndex}] `) + chalk.bold(new URL(savedData.url + link).pathname.split("/").pop()) + ", ")));
+                console.log(chalk.magenta("\nattachments: " + Object.entries(result.info.files).map(([linkIndex, link]) => chalk.italic(`[${result.info.id}:${linkIndex}] `) + chalk.bold(new URL(savedData.url + link).pathname.split("/").pop())).join(", ")));
         }
     })
     .command("download <attachmentId>", "download an attachment", (yargs) => {
