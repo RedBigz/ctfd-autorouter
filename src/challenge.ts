@@ -4,6 +4,7 @@ import { savedData } from "./savedData.js";
 import { createWriteStream, write } from "node:fs";
 import { promisify } from "node:util";
 import { finished } from "node:stream";
+import { join } from "node:path";
 
 interface ChallengeInfo {
     id: number;
@@ -40,7 +41,7 @@ export class Challenge {
 
     async downloadAttachments(outDir: string): Promise<void> {
         for (let i = 0; i < this.info.files.length; i++) {
-            this.downloadAttachment(i, outDir);
+            this.downloadAttachment(i, join(outDir, new URL(<string>savedData.url + this.info.files[i]).pathname.split("/").pop() as string));
         }
     }
 }
