@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { getCtfdInfo } from "./info.js";
 
 export async function preserveChallenges(outDir: string) {
-    const challenges = await oraPromise(fetchChallenges(), { text: "fetching all challenges"});
+    const challenges = await oraPromise(fetchChallenges(), { text: "fetching all challenges", successText: "fetched all challenges" });
 
     for (let challenge of challenges) {
         await oraPromise(async () => {
