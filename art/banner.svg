@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="960mm"
+   height="540mm"
+   viewBox="0 0 960 540"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   sodipodi:docname="banner.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.30772188"
+     inkscape:cx="1148.7646"
+     inkscape:cy="770.17597"
+     inkscape:window-width="2560"
+     inkscape:window-height="1372"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <rect
+       x="-120.23844"
+       y="-16.248438"
+       width="2141.5441"
+       height="1345.3707"
+       id="rect3" />
+    <rect
+       x="404.43663"
+       y="492.47726"
+       width="2811.7975"
+       height="1227.0663"
+       id="rect1" />
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Blur"
+       id="filter8"
+       x="-0.00013063867"
+       y="-2.1843841"
+       width="1.0002613"
+       height="5.3687682">
+      <feGaussianBlur
+         stdDeviation="0.01 100"
+         result="fbSourceGraphic"
+         id="feGaussianBlur8" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix8" />
+      <feGaussianBlur
+         id="feGaussianBlur9"
+         stdDeviation="0.01 100"
+         result="fbSourceGraphic"
+         in="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix9" />
+      <feGaussianBlur
+         id="feGaussianBlur10"
+         stdDeviation="0.01 100"
+         result="fbSourceGraphic"
+         in="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix10" />
+      <feGaussianBlur
+         id="feGaussianBlur11"
+         stdDeviation="0.01 100"
+         result="fbSourceGraphic"
+         in="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix11" />
+      <feGaussianBlur
+         id="feGaussianBlur12"
+         stdDeviation="0.01 100"
+         result="blur"
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Blur"
+       id="filter14"
+       x="-0.11334525"
+       y="-0.43300741"
+       width="1.2266905"
+       height="1.8660148">
+      <feGaussianBlur
+         stdDeviation="43.3812 99.1143"
+         result="blur"
+         id="feGaussianBlur14" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Banner"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="display:inline;fill:#181825;fill-opacity:1;stroke-width:0.264583"
+       id="rect2"
+       width="960"
+       height="540"
+       x="0"
+       y="-8.8817842e-16"
+       inkscape:label="rect2" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:expanded;font-size:123.472px;font-family:'DINish Expanded';-inkscape-font-specification:'DINish Expanded, Expanded';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;writing-mode:lr-tb;direction:ltr;fill:#cba6f7;fill-opacity:1;stroke-width:0.264583;filter:url(#filter14)"
+       x="-289.65207"
+       y="258.9827"
+       id="text4"
+       transform="rotate(-30)"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583;fill:#cba6f7;fill-opacity:1"
+         x="-289.65207"
+         y="258.9827"
+         id="tspan5">workspaces</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583;fill:#cba6f7;fill-opacity:1"
+         x="-289.65207"
+         y="413.32272"
+         id="tspan6">preservation</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583;fill:#cba6f7;fill-opacity:1"
+         x="-289.65207"
+         y="567.66272"
+         id="tspan7">userbot</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583;fill:#cba6f7;fill-opacity:1"
+         x="-289.65207"
+         y="722.00269"
+         id="tspan8">tool asssistance</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,68.53207,-10.704745)"
+       id="text1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:expanded;font-size:466.667px;font-family:'DINish Expanded';-inkscape-font-specification:'DINish Expanded, Expanded';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect1);display:inline;fill:#cdd6f4;fill-opacity:1"
+       inkscape:label="Text"><tspan
+         x="404.4375"
+         y="928.31405"
+         id="tspan2">ctfd-</tspan><tspan
+         x="404.4375"
+         y="1511.6478"
+         id="tspan3">autorouter</tspan></text>
+  </g>
+</svg>
