@@ -10,6 +10,7 @@ import { checkIfLoggedIn, CtfdLoginResult, login } from "./auth.js";
 import { savedData } from "./savedData.js";
 import { getCtfdInfo } from "./info.js";
 import { fetchChallenges, organiseByCategory, Challenge, fetchChallenge } from "./challenge.js";
+import { preserveChallenges } from "./preserve.js";
 
 yargs(hideBin(process.argv))
     .command("login", "log into a CTFd instance", async () => {
@@ -69,7 +70,7 @@ yargs(hideBin(process.argv))
             }
         }
     })
-    .command("challenge [name]", "get info on a challenge", (yargs) => {
+    .command("challenge <name>", "get info on a challenge", (yargs) => {
         yargs.positional("name", {
             type: "string",
             describe: "the name of the challenge (can be a substring!)"
@@ -102,10 +103,10 @@ yargs(hideBin(process.argv))
                 console.log(chalk.magenta("\nattachments: " + Object.entries(result.info.files).map(([linkIndex, link]) => chalk.italic(`[${result.info.id}:${linkIndex}] `) + chalk.bold(new URL(savedData.url + link).pathname.split("/").pop()) + ", ")));
         }
     })
-    .command("download [attachmentId]", "download an attachment", (yargs) => {
+    .command("download <attachmentId>", "download an attachment", (yargs) => {
         yargs.positional("attachmentId", {
             type: "string",
-            describe: "the attachment ID seen for a file when viewing a challenge with `ctf challenge [challenge]`"
+            describe: "the attachment ID seen for a file when viewing a challenge with `ctf challenge <challenge>`"
         });
     }, async (argv) => {
         if (!await checkIfLoggedIn()) {
@@ -137,6 +138,19 @@ yargs(hideBin(process.argv))
         let filename = new URL(savedData.url + challenge.info.files[fileId]).pathname.split("/").pop() as string;
 
         await oraPromise(challenge.downloadAttachment(fileId, filename), { text: "downloading " + filename, successText: "downloaded " + filename });
+    })
+    .command("preserve <output>", "preserve the CTF", (yargs) => {
+        yargs.positional("output", {
+            type: "string",
+            describe: "the output directory"
+        });
+    }, async (argv) => {
+        if (!await checkIfLoggedIn()) {
+            console.log(chalk.red("please log in to execute this command."));
+            return;
+        }
+
+        preserveChallenges(<string>argv.output);
     })
     .help()
     .parse();
