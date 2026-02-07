@@ -6,9 +6,10 @@ import chalk from "chalk";
 
 import { question } from "readline-sync";
 import { oraPromise } from "ora";
-import { CtfdLoginResult, login } from "./auth.js";
+import { checkIfLoggedIn, CtfdLoginResult, login } from "./auth.js";
 import { savedData } from "./savedData.js";
 import { getCtfdInfo } from "./info.js";
+import { fetchChallenges, organiseByCategory, Challenge, fetchChallenge } from "./challenge.js";
 
 yargs(hideBin(process.argv))
     .command("login", "log into a CTFd instance", async () => {
@@ -16,8 +17,8 @@ yargs(hideBin(process.argv))
         let username = question(`${chalk.magenta("enter username")}: `);
         let password = question(`${chalk.magenta("enter password")}: `, { hideEchoBack: true, history: false });
 
-        let result = await oraPromise(login(url, username, password), { text: "authenticating..."} );
-        
+        let result = await oraPromise(login(url, username, password), { text: "authenticating..." });
+
         switch (result) {
             case CtfdLoginResult.Success:
                 console.log(chalk.green("authentication successful :3"));
@@ -51,6 +52,91 @@ yargs(hideBin(process.argv))
         } else {
             console.log(chalk.yellow(`not logged in; account details unavailable.`));
         }
+    })
+    .command("challenges", "shows a list of challenges", async () => {
+        if (!await checkIfLoggedIn()) {
+            console.log(chalk.red("please log in to view challenges."));
+            return;
+        }
+
+        const challenges = organiseByCategory(await fetchChallenges());
+
+        for (const category in challenges) {
+            console.log(chalk.cyan(`${category}/`));
+
+            for (const challenge of <Challenge[]>challenges[category]) {
+                console.log("├─ " + chalk[challenge.info.solved ? "strikethrough" : "green"](`${challenge.info.name}`) + ` (${challenge.info.value})`)
+            }
+        }
+    })
+    .command("challenge [name]", "get info on a challenge", (yargs) => {
+        yargs.positional("name", {
+            type: "string",
+            describe: "the name of the challenge (can be a substring!)"
+        });
+    }, async (argv) => {
+        if (!await checkIfLoggedIn()) {
+            console.log(chalk.red("please log in to view challenge info."));
+            return;
+        }
+
+        const challenges = await fetchChallenges(); // this is wasteful but it should work :)
+
+        const results = challenges.filter((challenge) => challenge.info.name.includes(<string>argv.name));
+
+        if (results.length == 0) {
+            console.log(chalk.yellow("no challenge name includes the search term " + chalk.bold(<string>argv.name)));
+            return;
+        }
+
+        console.log(chalk.bold(`${results.length} result${results.length != 1 ? "s" : ""}`));
+
+        for (let result of results) {
+            console.log();
+            
+            console.log(chalk.cyan(result.info.category + "/") + result.info.name.replaceAll(<string>argv.name, chalk.underline(argv.name)));
+
+            console.log("\n" + result.info.description);
+
+            if (result.info.files.length > 0)
+                console.log(chalk.magenta("\nattachments: " + Object.entries(result.info.files).map(([linkIndex, link]) => chalk.italic(`[${result.info.id}:${linkIndex}] `) + chalk.bold(new URL(savedData.url + link).pathname.split("/").pop()) + ", ")));
+        }
+    })
+    .command("download [attachmentId]", "download an attachment", (yargs) => {
+        yargs.positional("attachmentId", {
+            type: "string",
+            describe: "the attachment ID seen for a file when viewing a challenge with `ctf challenge [challenge]`"
+        });
+    }, async (argv) => {
+        if (!await checkIfLoggedIn()) {
+            console.log(chalk.red("please log in to download files."));
+            return;
+        }
+
+        let attachmentId = <string>argv.attachmentId;
+
+        if (!attachmentId.includes(":")) {
+            console.log(chalk.red("attachment ID invalid. (correct example: 0:0)"));
+            return;
+        }
+
+        let [challengeId, fileId] = attachmentId.split(":").map((num) => parseInt(num)) as [number, number];
+
+        if (isNaN(challengeId) || isNaN(fileId)) {
+            console.log(chalk.red("attachment ID numbers malformed. (correct example: 0:0)"));
+            return;
+        }
+
+        let challenge = await fetchChallenge(challengeId);
+
+        if (!challenge.info.files[fileId]) {
+            console.log(chalk.red("attachment does not exist."));
+            return;
+        }
+
+        let filename = new URL(savedData.url + challenge.info.files[fileId]).pathname.split("/").pop() as string;
+
+        await oraPromise(challenge.downloadAttachment(fileId, filename), { text: "downloading " + filename, successText: "downloaded " + filename });
     })
     .help()
     .parse();
