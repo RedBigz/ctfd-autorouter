@@ -4,6 +4,19 @@
 
 My aim for this project is to allow my CTF team to preserve challenges for writeup and to easily assign challenges to each member to save us time.
 
+### For Reviewers: Installing CTFd
+
+CTFd is a daemon and must be running for this program to work. You can install it quickly with docker by running the following commands:
+
+```bash
+git clone https://github.com/CTFd/CTFd.git
+cd CTFd
+docker compose up -d
+```
+
+It'll listen on port 80 and requires web configuration to get going. Sorry :(<br/>
+Have a nice time reviewing it though!
+
 # Usage
 
 Install the package with `npm i git+https://github.com/RedBigz/ctfd-autorouter.git` and run `npx ctf login` to log into a CTFd server. Run `npx ctf --help` for all commands.
