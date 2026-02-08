@@ -33,7 +33,7 @@ export async function openShell(challenge: Challenge) {
 
     // show description and files
 
-    console.log(`${chalk.bold(challenge.info.name)}
+    console.log(`${chalk.bold(challenge.info.name)} (${challenge.info.value})
 
 ${mauveFg(challenge.info.description)}
 
