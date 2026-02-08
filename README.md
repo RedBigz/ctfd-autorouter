@@ -19,9 +19,17 @@ Have a nice time reviewing it though!
 
 # Usage
 
-Install the package with `npm i git+https://github.com/RedBigz/ctfd-autorouter.git` and run `npx ctf login` to log into a CTFd server. Run `npx ctf --help` for all commands.
+Install the package with `npm i -g git+https://github.com/RedBigz/ctfd-autorouter.git` and run `npx ctf login` to log into a CTFd server. `npx ctf info` can be used to verify instance info and check information about the current CTFd account. Check the [features](#features) for more commands.
 
 # Features
+
+## Basic Challenge Searching and Attachment Downloads
+
+To open a list of all the challenges in a CTFd instance, run `npx ctf challenges`.
+
+To open challenge information, you can run `npx ctf challenge <name>`. Note that `<name>` can be a substring!
+
+Along with the challenge information are **attachment codes**. These are a two number colon-separated symbol which represent a file attachment. These codes can be used with `npx ctf download <code>`.
 
 ## CTF Preservation
 
