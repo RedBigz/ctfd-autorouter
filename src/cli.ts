@@ -12,7 +12,7 @@ import { getCtfdInfo } from "./info.js";
 import { fetchChallenges, organiseByCategory, Challenge, fetchChallenge } from "./challenge.js";
 import { preserveChallenges } from "./preserve.js";
 import { openShell } from "./workspace.js";
-import { mauveFg } from "./scheme.js";
+import { mauveFg, redFg, greenFg, yellowFg } from "./scheme.js";
 
 yargs(hideBin(process.argv))
     .command("login", "log into a CTFd instance", async () => {
@@ -24,24 +24,24 @@ yargs(hideBin(process.argv))
 
         switch (result) {
             case CtfdLoginResult.Success:
-                console.log(chalk.green("authentication successful :3"));
+                console.log(greenFg("authentication successful :3"));
                 break;
             case CtfdLoginResult.Failure:
-                console.log(chalk.red("authentication failed :(") + "\n" + chalk.grey("reason: incorrect credentials."));
+                console.log(redFg("authentication failed :(") + "\n" + chalk.grey("reason: incorrect credentials."));
                 break;
             case CtfdLoginResult.FailureSystem:
-                console.log(chalk.red("authentication failed :(") + "\n" + chalk.grey("reason: a session or an XSRF token could not be gathered."));
+                console.log(redFg("authentication failed :(") + "\n" + chalk.grey("reason: a session or an XSRF token could not be gathered."));
         }
     })
     .command("info", "shows current CTF info", async () => {
         if (!savedData.url) {
-            console.log(chalk.red("please log in at least once to view CTF details."));
+            console.log(redFg("please log in at least once to view CTF details."));
             return;
         }
 
         let info = await getCtfdInfo();
         if (!info) {
-            console.log(chalk.red("there was an error gathering CTF details."));
+            console.log(redFg("there was an error gathering CTF details."));
             return;
         }
 
@@ -53,12 +53,12 @@ yargs(hideBin(process.argv))
             // user exists
             console.log(mauveFg(`[${info.user.id}] ${info.user.name} <${info.user.email}>`));
         } else {
-            console.log(chalk.yellow(`not logged in; account details unavailable.`));
+            console.log(yellowFg(`not logged in; account details unavailable.`));
         }
     })
     .command("challenges", "shows a list of challenges", async () => {
         if (!await checkIfLoggedIn()) {
-            console.log(chalk.red("please log in to view challenges."));
+            console.log(redFg("please log in to view challenges."));
             return;
         }
 
@@ -79,7 +79,7 @@ yargs(hideBin(process.argv))
         });
     }, async (argv) => {
         if (!await checkIfLoggedIn()) {
-            console.log(chalk.red("please log in to view challenge info."));
+            console.log(redFg("please log in to view challenge info."));
             return;
         }
 
@@ -88,7 +88,7 @@ yargs(hideBin(process.argv))
         const results = challenges.filter((challenge) => challenge.info.name.includes(<string>argv.name));
 
         if (results.length == 0) {
-            console.log(chalk.yellow("no challenge name includes the search term " + chalk.bold(<string>argv.name)));
+            console.log(yellowFg("no challenge name includes the search term " + chalk.bold(<string>argv.name)));
             return;
         }
 
@@ -112,28 +112,28 @@ yargs(hideBin(process.argv))
         });
     }, async (argv) => {
         if (!await checkIfLoggedIn()) {
-            console.log(chalk.red("please log in to download files."));
+            console.log(redFg("please log in to download files."));
             return;
         }
 
         let attachmentId = <string>argv.attachmentId;
 
         if (!attachmentId.includes(":")) {
-            console.log(chalk.red("attachment ID invalid. (correct example: 0:0)"));
+            console.log(redFg("attachment ID invalid. (correct example: 0:0)"));
             return;
         }
 
         let [challengeId, fileId] = attachmentId.split(":").map((num) => parseInt(num)) as [number, number];
 
         if (isNaN(challengeId) || isNaN(fileId)) {
-            console.log(chalk.red("attachment ID numbers malformed. (correct example: 0:0)"));
+            console.log(redFg("attachment ID numbers malformed. (correct example: 0:0)"));
             return;
         }
 
         let challenge = await fetchChallenge(challengeId);
 
         if (!challenge.info.files[fileId]) {
-            console.log(chalk.red("attachment does not exist."));
+            console.log(redFg("attachment does not exist."));
             return;
         }
 
@@ -148,7 +148,7 @@ yargs(hideBin(process.argv))
         });
     }, async (argv) => {
         if (!await checkIfLoggedIn()) {
-            console.log(chalk.red("please log in to execute this command."));
+            console.log(redFg("please log in to execute this command."));
             return;
         }
 
@@ -161,7 +161,7 @@ yargs(hideBin(process.argv))
         });
     }, async (argv) => {
         if (!await checkIfLoggedIn()) {
-            console.log(chalk.red("please log in to execute this command."));
+            console.log(redFg("please log in to execute this command."));
             return;
         }
 
@@ -170,7 +170,7 @@ yargs(hideBin(process.argv))
         const results = challenges.filter((challenge) => challenge.info.name.includes(<string>argv.challenge));
 
         if (results.length == 0) {
-            console.log(chalk.yellow("no challenge name includes the search term " + chalk.bold(<string>argv.name)));
+            console.log(yellowFg("no challenge name includes the search term " + chalk.bold(<string>argv.name)));
             return;
         }
 
