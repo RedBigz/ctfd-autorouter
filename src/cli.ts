@@ -11,6 +11,7 @@ import { savedData } from "./savedData.js";
 import { getCtfdInfo } from "./info.js";
 import { fetchChallenges, organiseByCategory, Challenge, fetchChallenge } from "./challenge.js";
 import { preserveChallenges } from "./preserve.js";
+import { openShell } from "./workspace.js";
 
 yargs(hideBin(process.argv))
     .command("login", "log into a CTFd instance", async () => {
@@ -151,6 +152,28 @@ yargs(hideBin(process.argv))
         }
 
         preserveChallenges(<string>argv.output);
+    })
+    .command("workspace <challenge>", "open a workspace with a CTF challenge", (yargs) => {
+        yargs.positional("challenge", {
+            type: "string",
+            describe: "the name (or substring) of the challenge"
+        });
+    }, async (argv) => {
+        if (!await checkIfLoggedIn()) {
+            console.log(chalk.red("please log in to execute this command."));
+            return;
+        }
+
+        const challenges = await fetchChallenges(); // this is wasteful but it should work :)
+
+        const results = challenges.filter((challenge) => challenge.info.name.includes(<string>argv.challenge));
+
+        if (results.length == 0) {
+            console.log(chalk.yellow("no challenge name includes the search term " + chalk.bold(<string>argv.name)));
+            return;
+        }
+
+        await openShell(<Challenge>results[0]);
     })
     .help()
     .parse();
