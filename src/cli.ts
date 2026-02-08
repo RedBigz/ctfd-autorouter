@@ -13,7 +13,10 @@ import { fetchChallenges, organiseByCategory, Challenge, fetchChallenge } from "
 import { preserveChallenges } from "./preserve.js";
 import { openShell } from "./workspace.js";
 import { mauveFg, redFg, greenFg, yellowFg } from "./scheme.js";
-import { analyseFile, tagFile } from "./heuristics.js";
+import { analyseFile, tagFile, type Tag } from "./heuristics.js";
+import { readdir } from "node:fs/promises";
+import { existsSync, read } from "node:fs";
+import { join } from "node:path";
 
 yargs(hideBin(process.argv))
     .command("login", "log into a CTFd instance", async () => {
@@ -190,6 +193,71 @@ yargs(hideBin(process.argv))
 
         tags.forEach((tag) => {
             console.log(" • " + tag);
+        });
+    })
+    .command("rank <preservedCtf> <preference>", "rank challenges on (comma-separated) preference tags in a preserved CTF", (yargs) => {
+        yargs.positional("preservedCtf", {
+            type: "string",
+            describe: "the path to a preserved ctf folder made with `ctf preserve <path>`"
+        });
+
+        yargs.positional("preference", {
+            type: "string",
+            describe: "a comma-separated list of tags you prefer. tags at the beginning will be preferred over the tags at the end. add * before a tag to exclude it. (available: dotnet, java, elf, dos, managed, unmanaged, model, cad, source, shell, graphic, image, archive)"
+        });
+    }, async (argv) => {
+        const preservePath = <string>argv.preservedCtf;
+        const list = (<string>argv.preference).split(",");
+
+        if (!existsSync(preservePath) || !existsSync(join(preservePath, "instance.json"))) {
+            console.log(redFg(`path or instance.json does not exist. make sure you preserved a ctf with \`ctf preserve ${preservePath}\`.`));
+            return;
+        }
+
+        const prefTags = list.filter((tag) => !tag.startsWith("*"));
+        const exclusionTags = list.filter((tag) => tag.startsWith("*")).map((tag) => tag.substring(1));
+
+        const categories = (await readdir(preservePath, { withFileTypes: true })).filter((item) => item.isDirectory()).map((item) => item.name);
+
+        // TAG SCORING SYSTEM
+        // tags given will be indexed in *reverse order* (e.g. the first tag out of seven will score 7 rank units)
+        // all tags in a CTF will be averaged to create the final rank.
+
+        const scorePerTag: { [tag: string]: number } = prefTags.reduce((prev, curr, index) => ({...prev, [curr]: prefTags.length - index}), {});
+
+        let ranks: { [challenge: string]: [number, Tag[], boolean] } = {};
+
+        for (const category of categories) {
+            const challenges = await readdir(join(preservePath, category));
+
+            for (const challenge of challenges) {
+                const path = join(preservePath, category, challenge);
+
+                let localTags: Tag[] = [];
+
+                const files = await readdir(path);
+
+                for (const file of files) {
+                    if (["challenge.json", "description"].includes(file)) continue;
+
+                    const analysis = await analyseFile(join(path, file));
+
+                    localTags = [...localTags, ...tagFile(analysis)];
+                    localTags = localTags.filter((item, index) => localTags.indexOf(item) == index); // deduplicate
+                }
+
+                const totalScore = localTags.reduce((prev, curr) => prev + (scorePerTag[curr] || 0), 0);
+
+                ranks[challenge] = [totalScore / Math.max(localTags.length, 1), localTags, localTags.some((tag) => exclusionTags.includes(tag))];
+            }
+        }
+
+        console.log(mauveFg("suggestions (desc. order):") + "\n");
+
+        Object.entries(ranks).toSorted((a, b) => b[1][0] - a[1][0]).forEach(([challenge, [rank, tags, excluded]]) => {
+            let passthrough = (a: any): any => a;
+
+            console.log((excluded ? chalk.strikethrough.grey : passthrough)(`[${rank}] ${challenge}${tags.length > 0 ? ` (${tags.join(", ")})` : ""}`));
         });
     })
     .help()

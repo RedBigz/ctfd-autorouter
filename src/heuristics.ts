@@ -18,7 +18,7 @@ interface Analysis {
     magicNumber: MagicNumber;
 }
 
-type Tag =
+export type Tag =
     // managed languages/formats
     "dotnet" | "java" |
     // unmanaged formats
