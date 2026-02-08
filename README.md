@@ -6,7 +6,7 @@ My aim for this project is to allow my CTF team to preserve challenges for write
 
 # Usage
 
-Install the package with `npm i https://github.com/redbigz/ctfd-autorouter` and run `npx ctf login` to log into a CTFd server. Run `npx ctf --help` for all commands.
+Install the package with `npm i git+https://github.com/RedBigz/ctfd-autorouter.git` and run `npx ctf login` to log into a CTFd server. Run `npx ctf --help` for all commands.
 
 # Features
 
