@@ -27,7 +27,7 @@ export async function openShell(challenge: Challenge) {
     let rcPath = join(tempDir, "rc_file");
 
     const prompt = baseBg(` ${info.name} `) + surfaceBg(baseFg(separator) + ` ${challenge.info.category} `) + mauveBg(surfaceFg(separator) + ` ${challenge.info.name} `) + mauveFg(separator) + "\n"
-        + `${mauveFg(`${chalk.bold("[workspace]")} $(realpath --relative-to="${workspacePath}" $(pwd)) `)} > `;
+        + `${mauveFg(`${chalk.bold("[workspace]")} \\$(realpath --relative-to="${workspacePath}" \\$(pwd)) `)} > `;
 
     await writeFile(rcPath, `[ -f ~/.bashrc ] && . ~/.bashrc; cd ${workspacePath}; export PS1="${prompt}";`)
 
