@@ -12,12 +12,13 @@ import { getCtfdInfo } from "./info.js";
 import { fetchChallenges, organiseByCategory, Challenge, fetchChallenge } from "./challenge.js";
 import { preserveChallenges } from "./preserve.js";
 import { openShell } from "./workspace.js";
+import { mauveFg } from "./scheme.js";
 
 yargs(hideBin(process.argv))
     .command("login", "log into a CTFd instance", async () => {
-        let url = question(`${chalk.magenta("enter CTFd URL")}: `);
-        let username = question(`${chalk.magenta("enter username")}: `);
-        let password = question(`${chalk.magenta("enter password")}: `, { hideEchoBack: true, history: false });
+        let url = question(`${mauveFg("enter CTFd URL")}: `);
+        let username = question(`${mauveFg("enter username")}: `);
+        let password = question(`${mauveFg("enter password")}: `, { hideEchoBack: true, history: false });
 
         let result = await oraPromise(login(url, username, password), { text: "authenticating..." });
 
@@ -45,12 +46,12 @@ yargs(hideBin(process.argv))
         }
 
         console.log(chalk.bold(info.name));
-        console.log(chalk.green("start date: ") + info.start);
-        console.log(chalk.red("end date: ") + info.end);
+        console.log(mauveFg("start date: ") + info.start);
+        console.log(mauveFg("end date: ") + info.end);
 
         if (info.user.id != 0) {
             // user exists
-            console.log(chalk.magenta(`[${info.user.id}] ${info.user.name} <${info.user.email}>`));
+            console.log(mauveFg(`[${info.user.id}] ${info.user.name} <${info.user.email}>`));
         } else {
             console.log(chalk.yellow(`not logged in; account details unavailable.`));
         }
@@ -64,10 +65,10 @@ yargs(hideBin(process.argv))
         const challenges = organiseByCategory(await fetchChallenges());
 
         for (const category in challenges) {
-            console.log(chalk.cyan(`${category}/`));
+            console.log(mauveFg(`${category}/`));
 
             for (const challenge of <Challenge[]>challenges[category]) {
-                console.log("├─ " + chalk[challenge.info.solved ? "strikethrough" : "green"](`${challenge.info.name}`) + ` (${challenge.info.value})`)
+                console.log("├─ " + (challenge.info.solved ? chalk.strikethrough : mauveFg)(`${challenge.info.name}`) + ` (${challenge.info.value})`)
             }
         }
     })
@@ -96,12 +97,12 @@ yargs(hideBin(process.argv))
         for (let result of results) {
             console.log();
             
-            console.log(chalk.cyan(result.info.category + "/") + result.info.name.replaceAll(<string>argv.name, chalk.underline(argv.name)));
+            console.log(mauveFg(result.info.category + "/") + result.info.name.replaceAll(<string>argv.name, chalk.underline(argv.name)));
 
             console.log("\n" + result.info.description);
 
             if (result.info.files.length > 0)
-                console.log(chalk.magenta("\nattachments: " + Object.entries(result.info.files).map(([linkIndex, link]) => chalk.italic(`[${result.info.id}:${linkIndex}] `) + chalk.bold(new URL(savedData.url + link).pathname.split("/").pop())).join(", ")));
+                console.log(mauveFg("\nattachments: " + Object.entries(result.info.files).map(([linkIndex, link]) => chalk.italic(`[${result.info.id}:${linkIndex}] `) + chalk.bold(new URL(savedData.url + link).pathname.split("/").pop())).join(", ")));
         }
     })
     .command("download <attachmentId>", "download an attachment", (yargs) => {
