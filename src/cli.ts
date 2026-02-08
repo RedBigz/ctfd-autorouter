@@ -13,6 +13,7 @@ import { fetchChallenges, organiseByCategory, Challenge, fetchChallenge } from "
 import { preserveChallenges } from "./preserve.js";
 import { openShell } from "./workspace.js";
 import { mauveFg, redFg, greenFg, yellowFg } from "./scheme.js";
+import { analyseFile, tagFile } from "./heuristics.js";
 
 yargs(hideBin(process.argv))
     .command("login", "log into a CTFd instance", async () => {
@@ -175,6 +176,21 @@ yargs(hideBin(process.argv))
         }
 
         await openShell(<Challenge>results[0]);
+    })
+    .command("heur <file>", "perform heuristics on single file (dev)", (yargs) => {
+        yargs.positional("file", {
+            type: "string",
+            describe: "path of the file to be analysed"
+        });
+    }, async (argv) => {
+        const analysis = await analyseFile(<string>argv.file);
+        const tags = tagFile(analysis);
+
+        console.log(mauveFg("tags:"));
+
+        tags.forEach((tag) => {
+            console.log(" • " + tag);
+        });
     })
     .help()
     .parse();
