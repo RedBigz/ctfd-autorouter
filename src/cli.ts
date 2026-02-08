@@ -170,7 +170,7 @@ yargs(hideBin(process.argv))
         const results = challenges.filter((challenge) => challenge.info.name.includes(<string>argv.challenge));
 
         if (results.length == 0) {
-            console.log(yellowFg("no challenge name includes the search term " + chalk.bold(<string>argv.name)));
+            console.log(yellowFg("no challenge name includes the search term " + chalk.bold(<string>argv.challenge)));
             return;
         }
 
