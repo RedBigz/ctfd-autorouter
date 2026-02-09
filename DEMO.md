@@ -1,10 +1,12 @@
 # Demo
 
-Hello! As of when this page was created, there is no public demo for this piece of software.
+Hello! As of when this page was created, there is no public demo for this piece of software. I've chosen to do this out of a risk of abuse.
+
+Instead, you can use community instances of CTFd (e.g. CTF practice instances or your school's instance) OR set up an environment to use ctfd-autorouter using only a few commands.
 
 ## Requirement: CTFd
 
-This program depends on accessing a web application called [CTFd](//github.com/CTFd/CTFd). This program is required to be running on an accessible web address (e.g. someone's server, or localhost) to be able to access challenges you put on it.
+This program depends on accessing a web application called [CTFd](//github.com/CTFd/CTFd). This daemon is required to be running on an accessible web address (e.g. someone's server, or localhost) to be able to access challenges you/others put on it.
 
 As a public CTFd instance for testers to use may be abused, I've chosen to require testers to either use their own servers or the [public demo instance of CTFd](https://demo.ctfd.io/) (which resets every 30min).
 
