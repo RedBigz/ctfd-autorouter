@@ -1,29 +1,32 @@
 <img src="art/banner_github.baked.svg" width="200px" />
 
-`ctfd-autorouter` is a userbot for [CTFd](//github.com/CTFd/CTFd) to automatically download jeopardy CTF challenges and group challenges based on their attributes (to improve team efficiency). It also has features for workspaces, preservation, and downloading challenge/instance info and attachments.
+<br/>
 
-My aim for this project is to allow my CTF team to preserve challenges for writeup and to easily assign challenges to each member to save us time.
+`ctfd-autorouter` is a userbot for [CTFd](//github.com/CTFd/CTFd) to download jeopardy CTF challenges and group challenges based on their attributes (to improve team efficiency). It also has features for workspaces, preservation, and downloading challenge/instance info and attachments.
 
-### For Reviewers: Installing CTFd
+My aim for this project is to allow my CTF team to preserve challenges for our write-ups and to easily assign challenges to each member to save us time.
 
-CTFd is a daemon and must be running for this program to work. You can install it quickly with docker by running the following commands:
-
-```bash
-git clone https://github.com/CTFd/CTFd.git
-cd CTFd
-docker compose up -d
-```
-
-It'll listen on port 80 and requires web configuration to get going. Sorry :(<br/>
-Have a nice time reviewing it though!
+*Rating or reviewing this project for Flavortown? [See here](DEMO.md) for instructions on how to set up a CTFd instance!*
 
 # Usage
+
+### [Demo Video](img/demo.webm)
+
+## Requirements
+
+- [Node.js](//nodejs.org) ≥ 24
+- NPM
+- A Linux distribution with bash installed
+
+## Installation and Basic Commands
 
 Install the package with `npm i -g git+https://github.com/RedBigz/ctfd-autorouter.git` and run `npx ctf login` to log into a CTFd server. `npx ctf info` can be used to verify instance info and check information about the current CTFd account. Check the [features](#features) for more commands.
 
 # Features
 
 ## Basic Challenge Searching and Attachment Downloads
+
+**NOTE:** This program has only been tested with User Mode, which most likely has a few differences relating to the "solved" status of challenges. Thus, `npx ctf challenges` may not accurately show whether your team solved a challenge in Team Mode.
 
 To open a list of all the challenges in a CTFd instance, run `npx ctf challenges`.
 
@@ -83,7 +86,7 @@ Here are some example tag lists:
 - `source` - Source Files
 - `shell` - Shell Scripts (.sh, .zsh, .fish)
 - `graphic` - Graphics (PNG, JPEG, SVG)
-- `image` - Disk Images (ISO-9660 .iso, .img)
+- `image` - Disk Images (.iso, .img)
 - `archive` - Archives (TAR, XZ, GZip, LZMA, BZip, 7Zip)
 - `other` - Other filetypes
 
