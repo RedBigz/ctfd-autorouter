@@ -10,7 +10,7 @@ My aim for this project is to allow my CTF team to preserve challenges for our w
 
 # Usage
 
-### [Demo Video](img/demo.webm)
+### [Demo Video](https://user-cdn.hackclub-assets.com/019c4277-6bfe-76e6-b474-718e4c161169/demo.webm)
 
 ## Requirements
 

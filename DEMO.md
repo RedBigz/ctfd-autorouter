@@ -29,4 +29,4 @@ Check the [usage section in the README](README.md#usage) for instructions.
 
 # Demo Video
 
-If you are unable to test the software, a video has been provided to explain all the features of this tool. Access it [here](img/demo.webm). 
+If you are unable to test the software, a video has been provided to explain all the features of this tool. Access it [here](https://user-cdn.hackclub-assets.com/019c4277-6bfe-76e6-b474-718e4c161169/demo.webm). 
