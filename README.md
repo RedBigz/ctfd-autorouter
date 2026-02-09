@@ -1,6 +1,6 @@
 <img src="art/banner_github.baked.svg" width="200px" />
 
-<br/>
+[![NPM Version](https://img.shields.io/npm/v/ctfd-autorouter?style=for-the-badge&logo=npm&color=red)](https://www.npmjs.com/package/ctfd-autorouter) ![Hackatime Stats](https://hackatime-badge.hackclub.com/U08HR9MJ29M/ctfd-autorouter?style=for-the-badge&logo=wakatime&color=red)
 
 `ctfd-autorouter` is a userbot for [CTFd](//github.com/CTFd/CTFd) to download jeopardy CTF challenges and group challenges based on their attributes (to improve team efficiency). It also has features for workspaces, preservation, and downloading challenge/instance info and attachments.
 
@@ -20,7 +20,7 @@ My aim for this project is to allow my CTF team to preserve challenges for our w
 
 ## Installation and Basic Commands
 
-Install the package with `npm i -g git+https://github.com/RedBigz/ctfd-autorouter.git` and run `npx ctf login` to log into a CTFd server. `npx ctf info` can be used to verify instance info and check information about the current CTFd account. Check the [features](#features) for more commands.
+Install the package with `npm i -g ctfd-autorouter` and run `npx ctf login` to log into a CTFd server. `npx ctf info` can be used to verify instance info and check information about the current CTFd account. Check the [features](#features) for more commands.
 
 # Features
 
