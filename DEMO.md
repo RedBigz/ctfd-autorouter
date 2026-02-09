@@ -1,3 +1,5 @@
+***If you are unable to test the software, a video has been provided to explain all the features of this tool.** Access it [here](https://user-cdn.hackclub-assets.com/019c4277-6bfe-76e6-b474-718e4c161169/demo.webm).*
+
 # Demo
 
 Hello! As of when this page was created, there is no public demo for this piece of software. I've chosen to do this out of a risk of abuse.
@@ -28,7 +30,3 @@ Have a nice time playing with it though!
 ## Installing ctfd-autorouter
 
 Check the [usage section in the README](README.md#usage) for instructions.
-
-# Demo Video
-
-If you are unable to test the software, a video has been provided to explain all the features of this tool. Access it [here](https://user-cdn.hackclub-assets.com/019c4277-6bfe-76e6-b474-718e4c161169/demo.webm). 
