@@ -1,14 +1,12 @@
 <img src="art/banner_github.baked.svg" width="200px" />
 
-[![NPM Version](https://img.shields.io/npm/v/ctfd-autorouter?style=for-the-badge&logo=npm&color=red)](https://www.npmjs.com/package/ctfd-autorouter) ![Hackatime Stats](https://hackatime-badge.hackclub.com/U08HR9MJ29M/ctfd-autorouter?style=for-the-badge&logo=wakatime&color=red)
+[![NPM Version](https://img.shields.io/npm/v/ctfd-autorouter?style=for-the-badge&logo=npm&color=red)](https://www.npmjs.com/package/ctfd-autorouter)
 
 `ctfd-autorouter` is a userbot for [CTFd](//github.com/CTFd/CTFd) to download jeopardy CTF challenges and group challenges based on their attributes (to improve team efficiency). It also has features for workspaces, preservation, and downloading challenge/instance info and attachments.
 
 My aim for this project is to allow my CTF team to preserve challenges for our write-ups and to easily assign challenges to each member to save us time.
 
 # Usage
-
-### [Demo Video](https://user-cdn.hackclub-assets.com/019c4277-6bfe-76e6-b474-718e4c161169/demo.webm)
 
 ## Requirements
 
