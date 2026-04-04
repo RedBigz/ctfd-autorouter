@@ -6,8 +6,6 @@
 
 My aim for this project is to allow my CTF team to preserve challenges for our write-ups and to easily assign challenges to each member to save us time.
 
-*Rating or reviewing this project for Flavortown? [See here](DEMO.md) for instructions on how to set up a CTFd instance!*
-
 # Usage
 
 ### [Demo Video](https://user-cdn.hackclub-assets.com/019c4277-6bfe-76e6-b474-718e4c161169/demo.webm)
