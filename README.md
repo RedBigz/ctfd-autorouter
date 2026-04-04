@@ -4,7 +4,7 @@
 
 `ctfd-autorouter` is a userbot for [CTFd](//github.com/CTFd/CTFd) to download jeopardy CTF challenges and group challenges based on their attributes (to improve team efficiency). It also has features for workspaces, preservation, and downloading challenge/instance info and attachments.
 
-My aim for this project is to allow my CTF team to preserve challenges for our write-ups and to easily assign challenges to each member to save us time.
+Our aim for this project was to allow our CTF team to preserve challenges for our write-ups and to easily assign challenges to each member to save us time.
 
 # Usage
 
